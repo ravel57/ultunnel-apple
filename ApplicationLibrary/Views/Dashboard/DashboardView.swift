@@ -12,64 +12,231 @@ public struct DashboardView: View {
     @AppStorage("accessKey") private var accessKey: String = ""
 
     public init() {}
-    public var body: some View {
-        viewBuilder {
-            #if os(macOS)
-                if Variant.useSystemExtension {
-                    viewBuilder {
-                        if !systemExtensionInstalled {
-                            FormView {
-                                InstallSystemExtensionButton {
-                                    await reload()
-                                }
-                            }
-                        } else {
-                            DashboardView0()
-                        }
-                    }.onAppear {
-                        Task {
-                            await reload()
-                        }
-                    }
-                } else {
-                    DashboardView0()
-                }
-            #else
-                DashboardView0()
-                    .refreshable {
-                        await reload()
-                    }
-            #endif
-        }
-        #if os(macOS)
-            .onChangeCompat(of: controlActiveState) { newValue in
-                if newValue != .inactive {
+        public var body: some View {
+            viewBuilder {
+                #if os(macOS)
                     if Variant.useSystemExtension {
-                        if !isLoading {
+                        viewBuilder {
+                            if !systemExtensionInstalled {
+                                FormView {
+                                    InstallSystemExtensionButton {
+                                        await reload()
+                                    }
+                                }
+                            } else {
+                                DashboardView0()
+                            }
+                        }.onAppear {
                             Task {
                                 await reload()
                             }
                         }
+                    } else {
+                        DashboardView0()
+                    }
+                #else
+                    DashboardView0()
+                        .refreshable {
+                            await reload()
+                        }
+                #endif
+            }
+            #if os(macOS)
+                .onChangeCompat(of: controlActiveState) { newValue in
+                    if newValue != .inactive {
+                        if Variant.useSystemExtension {
+                            if !isLoading {
+                                Task {
+                                    await reload()
+                                }
+                            }
+                        }
                     }
                 }
+            #endif
+        }
+
+        #if os(macOS)
+            private nonisolated func reload() async {
+                let systemExtensionInstalled = await SystemExtension.isInstalled()
+                await MainActor.run {
+                    self.systemExtensionInstalled = systemExtensionInstalled
+                    isLoading = false
+                }
             }
+        #else
+            private func reload() async {
+                do {
+                    let urlString = "https://admin.ultunnel.ru/api/v1/get-users-proxy-servers-singbox?secretKey=\(accessKey)"
+
+                    let fetchedData = try await fetchData(from: urlString)
+                    guard !fetchedData.isEmpty else {
+                        print("⚠ Нет новых конфигураций.")
+                        return
+                    }
+
+                    for config in try await ProfileManager.list() {
+                        try await ProfileManager.delete(config)
+                    }
+
+                    let configDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("configs")
+                    try FileManager.default.createDirectory(at: configDirectory, withIntermediateDirectories: true)
+
+                    for config in fetchedData {
+                        let fileID = try await ProfileManager.nextID()
+                        let configFile = configDirectory.appendingPathComponent("\(fileID).json")
+
+                        let profileType: ProfileType = .local
+
+                        let profile = Profile(
+                            id: fileID,
+                            name: config.name,
+                            order: try await ProfileManager.nextOrder(),
+                            type: profileType,
+                            path: configFile.path
+                        )
+
+                        try config.content.write(to: configFile, atomically: true, encoding: .utf8)
+                        try await ProfileManager.create(profile)
+                    }
+
+                } catch {
+                    print("❌ Ошибка при обновлении профилей: \(error.localizedDescription)")
+                }
+            }
+
+
         #endif
+
+    struct ConfigFileFromServer: Decodable {
+        let content: String
+        let name: String
     }
 
-    #if os(macOS)
-        private nonisolated func reload() async {
-            let systemExtensionInstalled = await SystemExtension.isInstalled()
-            await MainActor.run {
-                self.systemExtensionInstalled = systemExtensionInstalled
-                isLoading = false
+    struct ConfigWithServerName: Codable {
+        let server: String
+        let configs: [Config]
+
+        enum CodingKeys: String, CodingKey {
+            case server
+            case configs
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            server = try container.decode(String.self, forKey: .server)
+
+            let rawConfigs = try container.decode([String].self, forKey: .configs)
+            let decoder = JSONDecoder()
+            configs = try rawConfigs.map { rawConfig in
+                guard let data = rawConfig.data(using: .utf8) else {
+                    throw DecodingError.dataCorrupted(
+                        DecodingError.Context(
+                            codingPath: container.codingPath,
+                            debugDescription: "Invalid JSON string in configs"
+                        )
+                    )
+                }
+                return try decoder.decode(Config.self, from: data)
             }
         }
-    #else
-        private func reload() async {
-            
-        }
-    #endif
+    }
 
+    struct Config: Codable {
+        let log: Log
+        let dns: DNS
+        let inbounds: [Inbound]?
+        let outbounds: [Outbound]?
+        let route: Route
+    }
+
+    struct Log: Codable {
+        let level: String
+    }
+
+    struct DNS: Codable {
+        let servers: [DNSServer]
+    }
+
+    struct DNSServer: Codable {
+        let tag: String
+        let address: String
+    }
+
+    struct Inbound: Codable {
+        let type: String
+        let tag: String
+    }
+
+    struct Outbound: Codable {
+        let type: String
+        let tag: String?
+        let server: String?
+        let serverPort: Int?
+        let uuid: String?
+        let systemInterface: String?
+        let interfaceName: String?
+        let localAddress: [String]?
+        let privateKey: String?
+        let peers: [String]?
+        let peerPublicKey: String?
+        let preSharedKey: String?
+        let reserved: [String]?
+        let workers: String?
+        let mtu: Int?
+        let network: String?
+        let gso: String?
+        let user: String?
+        let password: String?
+    }
+
+    struct Route: Codable {
+        let rules: [RouteRule]
+    }
+
+    struct RouteRule: Codable {
+        let port: Int?
+        let inbound: String?
+        let outbound: String
+    }
+    
+    private func fetchData(from urlString: String) async throws -> [ConfigFileFromServer] {
+        guard let url = URL(string: urlString) else {
+            throw URLError(.badURL)
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        do {
+            let (responseData, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                throw URLError(.badServerResponse)
+            }
+
+            let decoder = JSONDecoder()
+            let decodedData = try decoder.decode([ConfigWithServerName].self, from: responseData)
+
+            return decodedData.flatMap { serverConfig in
+                serverConfig.configs.compactMap { jsonConfig in
+                    let configData = try? JSONEncoder().encode(jsonConfig)
+                    let jsonString = String(data: configData ?? Data(), encoding: .utf8) ?? ""
+
+                    return ConfigFileFromServer(
+                        content: jsonString,
+                        name: "\(serverConfig.server)-\(jsonConfig.outbounds?.first?.type ?? "null")"
+                    )
+                }
+            }
+        } catch {
+            print("❌ Ошибка при декодировании JSON: \(error)")
+            throw error
+        }
+    }
+
+
+    
     struct DashboardView0: View {
         @EnvironmentObject private var environments: ExtensionEnvironments
 

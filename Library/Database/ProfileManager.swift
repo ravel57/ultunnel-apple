@@ -90,7 +90,7 @@ public enum ProfileManager {
         }
     }
 
-    private nonisolated static func nextOrder() async throws -> UInt32 {
+    public nonisolated static func nextOrder() async throws -> UInt32 {
         try await Database.sharedWriter.read { db in
             try UInt32(Profile.fetchCount(db))
         }

@@ -12,7 +12,7 @@ public enum NavigationPage: Int, CaseIterable, Identifiable {
         case groups
         case connections
     #endif
-    case logs
+//    case logs
     case profiles
     case settings
 }
@@ -20,7 +20,7 @@ public enum NavigationPage: Int, CaseIterable, Identifiable {
 public extension NavigationPage {
     #if os(macOS)
         static var macosDefaultPages: [NavigationPage] {
-            [.logs, .profiles, .settings]
+            [/*.logs,*/ .profiles, .settings]
         }
     #endif
 
@@ -39,8 +39,8 @@ public extension NavigationPage {
             case .connections:
                 return NSLocalizedString("Connections", comment: "")
         #endif
-        case .logs:
-            return String(localized: "Logs")
+//        case .logs:
+//            return String(localized: "Logs")
         case .profiles:
             return String(localized: "Profiles")
         case .settings:
@@ -58,8 +58,8 @@ public extension NavigationPage {
             case .connections:
                 return "list.bullet.rectangle.portrait.fill"
         #endif
-        case .logs:
-            return "doc.text.fill"
+//        case .logs:
+//            return "doc.text.fill"
         case .profiles:
             return "list.bullet.rectangle.fill"
         case .settings:
@@ -79,8 +79,8 @@ public extension NavigationPage {
                 case .connections:
                     ConnectionListView()
             #endif
-            case .logs:
-                LogView()
+//            case .logs:
+//                LogView()
             case .profiles:
                 ProfileView()
             case .settings:
