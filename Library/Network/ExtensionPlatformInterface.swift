@@ -7,6 +7,11 @@ import UserNotifications
 #endif
 
 public class ExtensionPlatformInterface: NSObject, LibboxPlatformInterfaceProtocol, LibboxCommandServerHandlerProtocol {
+    
+    public func updateRouteOptions(_ options: (any LibboxTunOptionsProtocol)?) throws {
+        
+    }
+    
     private let tunnel: ExtensionProvider
     private var networkSettings: NEPacketTunnelNetworkSettings?
 

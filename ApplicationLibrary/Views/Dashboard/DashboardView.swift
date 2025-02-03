@@ -9,6 +9,7 @@ public struct DashboardView: View {
         @State private var isLoading = true
         @State private var systemExtensionInstalled = true
     #endif
+    @AppStorage("accessKey") private var accessKey: String = ""
 
     public init() {}
     public var body: some View {
@@ -35,20 +36,23 @@ public struct DashboardView: View {
                 }
             #else
                 DashboardView0()
+                    .refreshable {
+                        await reload()
+                    }
             #endif
         }
         #if os(macOS)
-        .onChangeCompat(of: controlActiveState) { newValue in
-            if newValue != .inactive {
-                if Variant.useSystemExtension {
-                    if !isLoading {
-                        Task {
-                            await reload()
+            .onChangeCompat(of: controlActiveState) { newValue in
+                if newValue != .inactive {
+                    if Variant.useSystemExtension {
+                        if !isLoading {
+                            Task {
+                                await reload()
+                            }
                         }
                     }
                 }
             }
-        }
         #endif
     }
 
@@ -59,6 +63,10 @@ public struct DashboardView: View {
                 self.systemExtensionInstalled = systemExtensionInstalled
                 isLoading = false
             }
+        }
+    #else
+        private func reload() async {
+            
         }
     #endif
 
@@ -165,7 +173,8 @@ public struct DashboardView: View {
                 return
             }
             await MainActor.run {
-                alert = Alert(title: Text("Service Error"), message: Text(message!.value))
+                alert = Alert(
+                    title: Text("Service Error"), message: Text(message!.value))
             }
         }
 
@@ -182,9 +191,13 @@ public struct DashboardView: View {
                 if myError.domain == "Library.FullDiskAccessPermissionRequired" {
                     await MainActor.run {
                         alert = Alert(
-                            title: Text("Full Disk Access permission is required"),
-                            message: Text("Please grant the permission for **SFMExtension**, then we can continue."),
-                            primaryButton: .default(Text("Authorize"), action: openFDASettings),
+                            title: Text(
+                                "Full Disk Access permission is required"),
+                            message: Text(
+                                "Please grant the permission for **SFMExtension**, then we can continue."
+                            ),
+                            primaryButton: .default(
+                                Text("Authorize"), action: openFDASettings),
                             secondaryButton: .cancel()
                         )
                     }
@@ -200,13 +213,24 @@ public struct DashboardView: View {
         #if os(macOS)
 
             private func openFDASettings() {
-                if NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles")!) {
+                if NSWorkspace.shared.open(
+                    URL(
+                        string:
+                            "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+                    )!)
+                {
                     return
                 }
                 if #available(macOS 13, *) {
-                    NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Applications/System Settings.app"))
+                    NSWorkspace.shared.open(
+                        URL(
+                            fileURLWithPath:
+                                "/System/Applications/System Settings.app"))
                 } else {
-                    NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Applications/System Preferences.app"))
+                    NSWorkspace.shared.open(
+                        URL(
+                            fileURLWithPath:
+                                "/System/Applications/System Preferences.app"))
                 }
             }
 

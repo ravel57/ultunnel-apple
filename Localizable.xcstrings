@@ -50,6 +50,9 @@
         }
       }
     },
+    "Access Key" : {
+
+    },
     "Action" : {
       "localizations" : {
         "zh-Hans" : {
@@ -538,6 +541,9 @@
     },
     "enforceRoutes" : {
       "shouldTranslate" : false
+    },
+    "Enter your access key" : {
+
     },
     "Error" : {
       "localizations" : {

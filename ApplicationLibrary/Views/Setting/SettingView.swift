@@ -1,8 +1,9 @@
-
 import Library
 import SwiftUI
 
 public struct SettingView: View {
+    @AppStorage("accessKey") private var accessKey: String = ""
+    
     private enum Tabs: Int, CaseIterable, Identifiable {
         public var id: Self {
             self
@@ -98,6 +99,11 @@ public struct SettingView: View {
     public init() {}
     public var body: some View {
         FormView {
+            Section(header: Text("Access Key")) {
+                TextField("Enter your access key", text: $accessKey)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
+            
             #if os(macOS)
                 Tabs.app.navigationLink
             #endif
