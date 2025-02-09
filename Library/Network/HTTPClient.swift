@@ -8,7 +8,7 @@ public class HTTPClient {
         userAgent += Bundle.main.version
         userAgent += " (Build "
         userAgent += Bundle.main.versionNumber
-        userAgent += "; sing-box "
+        userAgent += "; ultunnel "
         userAgent += LibboxVersion()
         userAgent += "; language "
         userAgent += Locale.current.identifier

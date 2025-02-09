@@ -7,6 +7,7 @@ struct MainView: View {
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject private var environments: ExtensionEnvironments
 
+    @AppStorage("accessKey") private var accessKey: String = ""
     @State private var selection = NavigationPage.dashboard
     @State private var importProfile: LibboxProfileContent?
     @State private var importRemoteProfile: LibboxImportRemoteProfile?
@@ -32,6 +33,9 @@ struct MainView: View {
             }
         }
         .onAppear {
+            if accessKey.isEmpty {
+                selection = .settings
+            }
             environments.postReload()
         }
         .alertBinding($alert)
@@ -40,11 +44,11 @@ struct MainView: View {
                 environments.postReload()
             }
         }
-        .onChangeCompat(of: selection) { newValue in
-            if newValue == .logs {
-                environments.connectLog()
-            }
-        }
+//        .onChangeCompat(of: selection) { newValue in
+//            if newValue == .logs {
+//                environments.connectLog()
+//            }
+//        }
         .environment(\.selection, $selection)
         .environment(\.importProfile, $importProfile)
         .environment(\.importRemoteProfile, $importRemoteProfile)
@@ -60,9 +64,6 @@ struct MainView: View {
                 alert = Alert(error)
                 return
             }
-            if selection != .profiles {
-                selection = .profiles
-            }
         } else if url.pathExtension == "bpf" {
             do {
                 _ = url.startAccessingSecurityScopedResource()
@@ -71,9 +72,6 @@ struct MainView: View {
             } catch {
                 alert = Alert(error)
                 return
-            }
-            if selection != .profiles {
-                selection = .profiles
             }
         } else {
             alert = Alert(errorMessage: String(localized: "Handled unknown URL \(url.absoluteString)"))

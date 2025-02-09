@@ -24,7 +24,7 @@ public struct LogView: View {
                     "INFO[0000] router: loaded geosite database: 1400 codes",
                     "INFO[0000] router: updated default interface en0, index 11",
                     "inbound/tun[0]: started at utun3",
-                    "sing-box started (1.666s)",
+                    "ultunnel started (1.666s)",
                 ]
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {

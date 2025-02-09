@@ -10,9 +10,9 @@
 	<true/>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>io.nekohasekai.sfavt.standalone</key>
+		<key>ru.proxplkz.ultunnel.standalone</key>
 		<string>XC io nekohasekai sfavt standalone</string>
-		<key>io.nekohasekai.sfavt.system</key>
+		<key>ru.proxplkz.ultunnel.system</key>
 		<string>XC io nekohasekai sfavt system</string>
 	</dict>
 </dict>

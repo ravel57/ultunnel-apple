@@ -8,6 +8,15 @@ import UserNotifications
 
 public class ExtensionPlatformInterface: NSObject, LibboxPlatformInterfaceProtocol, LibboxCommandServerHandlerProtocol {
     
+    public func localDNSTransport() -> (any LibboxLocalDNSTransportProtocol)? {
+        return nil
+    }
+    
+    public func systemCertificates() -> (any LibboxStringIteratorProtocol)? {
+        return nil
+    }
+    
+    
     public func updateRouteOptions(_ options: (any LibboxTunOptionsProtocol)?) throws {
         
     }

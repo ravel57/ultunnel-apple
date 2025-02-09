@@ -390,6 +390,7 @@
       }
     },
     "Deprecated Warning" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -420,6 +421,7 @@
       }
     },
     "Do not enforce memory limits on sing-box. Will cause OOM on non-jailbroken iOS and tvOS devices." : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -428,6 +430,9 @@
           }
         }
       }
+    },
+    "Do not enforce memory limits on ultunnel. Will cause OOM on non-jailbroken iOS and tvOS devices." : {
+
     },
     "Documentation" : {
       "localizations" : {
@@ -919,6 +924,7 @@
       }
     },
     "Logs" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1176,6 +1182,7 @@
       }
     },
     "Profiles" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1206,6 +1213,7 @@
       }
     },
     "Quit sing-box" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1279,6 +1287,7 @@
       }
     },
     "Service Error" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -1357,9 +1366,6 @@
           }
         }
       }
-    },
-    "sing-box" : {
-      "shouldTranslate" : false
     },
     "Sort By" : {
       "localizations" : {
@@ -1626,6 +1632,9 @@
           }
         }
       }
+    },
+    "Ошибка" : {
+
     }
   },
   "version" : "1.0"

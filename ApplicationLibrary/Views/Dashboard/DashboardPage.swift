@@ -8,7 +8,7 @@ public enum DashboardPage: Int, CaseIterable, Identifiable {
     }
 
     case overview
-    case groups
+//    case groups
     case connections
 }
 
@@ -16,7 +16,7 @@ public extension DashboardPage {
     static func enabledCases() -> [DashboardPage] {
         var cases: [DashboardPage] = [
             .overview,
-            .groups,
+//            .groups,
         ]
         #if !tvOS
             if Variant.isBeta {
@@ -32,8 +32,8 @@ public extension DashboardPage {
         switch self {
         case .overview:
             return String(localized: "Overview")
-        case .groups:
-            return String(localized: "Groups")
+//        case .groups:
+//            return String(localized: "Groups")
         case .connections:
             return String(localized: "Connections")
         }
@@ -43,8 +43,8 @@ public extension DashboardPage {
         switch self {
         case .overview:
             return Label(title, systemImage: "text.and.command.macwindow")
-        case .groups:
-            return Label(title, systemImage: "rectangle.3.group.fill")
+//        case .groups:
+//            return Label(title, systemImage: "rectangle.3.group.fill")
         case .connections:
             return Label(title, systemImage: "list.bullet.rectangle.portrait.fill")
         }
@@ -56,8 +56,8 @@ public extension DashboardPage {
             switch self {
             case .overview:
                 OverviewView(profileList, selectedProfileID, systemProxyAvailable, systemProxyEnabled)
-            case .groups:
-                GroupListView()
+//            case .groups:
+//                GroupListView()
             case .connections:
                 ConnectionListView()
             }

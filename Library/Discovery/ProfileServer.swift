@@ -11,7 +11,7 @@ public class ProfileServer {
     @available(iOS 16.0, macOS 13.0, *)
     public init() throws {
         listener = try NWListener(using: .applicationService)
-        listener.service = NWListener.Service(applicationService: "sing-box:profile")
+        listener.service = NWListener.Service(applicationService: "ultunnel:profile")
         listener.newConnectionHandler = { connection in
             connection.stateUpdateHandler = { state in
                 if state == .ready {

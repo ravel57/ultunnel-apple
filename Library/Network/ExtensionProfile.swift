@@ -3,7 +3,7 @@ import Libbox
 import NetworkExtension
 
 public class ExtensionProfile: ObservableObject {
-    public static let controlKind = "io.nekohasekai.sfavt.widget.ServiceToggle"
+    public static let controlKind = "ru.proxplkz.ultunnel.widget.ServiceToggle"
 
     private let manager: NEVPNManager
     private var connection: NEVPNConnection
@@ -123,7 +123,7 @@ public class ExtensionProfile: ObservableObject {
         } else {
             tunnelProtocol.providerBundleIdentifier = "\(FilePath.packageName).extension"
         }
-        tunnelProtocol.serverAddress = "sing-box"
+        tunnelProtocol.serverAddress = "ultunnel"
         manager.protocolConfiguration = tunnelProtocol
         manager.isEnabled = true
         try await manager.saveToPreferences()

@@ -13,7 +13,7 @@ public enum NavigationPage: Int, CaseIterable, Identifiable {
         case connections
     #endif
 //    case logs
-    case profiles
+//    case profiles
     case settings
 }
 
@@ -41,8 +41,8 @@ public extension NavigationPage {
         #endif
 //        case .logs:
 //            return String(localized: "Logs")
-        case .profiles:
-            return String(localized: "Profiles")
+//        case .profiles:
+//            return String(localized: "Profiles")
         case .settings:
             return String(localized: "Settings")
         }
@@ -60,8 +60,8 @@ public extension NavigationPage {
         #endif
 //        case .logs:
 //            return "doc.text.fill"
-        case .profiles:
-            return "list.bullet.rectangle.fill"
+//        case .profiles:
+//            return "list.bullet.rectangle.fill"
         case .settings:
             return "gear.circle.fill"
         }
@@ -81,8 +81,8 @@ public extension NavigationPage {
             #endif
 //            case .logs:
 //                LogView()
-            case .profiles:
-                ProfileView()
+//            case .profiles:
+//                ProfileView()
             case .settings:
                 SettingView()
             }

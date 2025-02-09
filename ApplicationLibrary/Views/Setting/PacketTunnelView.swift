@@ -24,7 +24,7 @@ struct PacketTunnelView: View {
             } else {
                 FormView {
                     FormToggle("Ignore Memory Limit", """
-                    Do not enforce memory limits on sing-box. Will cause OOM on non-jailbroken iOS and tvOS devices.
+                    Do not enforce memory limits on ultunnel. Will cause OOM on non-jailbroken iOS and tvOS devices.
                     """, $ignoreMemoryLimit) { newValue in
                         await SharedPreferences.ignoreMemoryLimit.set(newValue)
                     }

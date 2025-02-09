@@ -8,14 +8,14 @@
 			<key>CFBundleTypeIconFile</key>
 			<string>AppIcon.icns</string>
 			<key>CFBundleTypeName</key>
-			<string>sing-box Profile</string>
+			<string>ultunnel Profile</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>io.nekohasekai.sfavt.profile</string>
+				<string>ru.proxplkz.ultunnel.profile</string>
 			</array>
 		</dict>
 	</array>
@@ -27,10 +27,10 @@
 			<key>CFBundleURLIconFile</key>
 			<string>AppIcon</string>
 			<key>CFBundleURLName</key>
-			<string>sing-box</string>
+			<string>ultunnel</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>sing-box</string>
+				<string>ultunnel</string>
 			</array>
 		</dict>
 	</array>
@@ -38,12 +38,12 @@
 	<false/>
 	<key>NSUbiquitousContainers</key>
 	<dict>
-		<key>iCloud.io.nekohasekai.sfavt</key>
+		<key>iCloud.ru.proxplkz.ultunnel</key>
 		<dict>
 			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
 			<true/>
 			<key>NSUbiquitousContainerName</key>
-			<string>sing-box</string>
+			<string>ultunnel</string>
 			<key>NSUbiquitousContainerSupportedFolderLevels</key>
 			<string>Any</string>
 		</dict>
@@ -58,11 +58,11 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>sing-box Profile</string>
+			<string>ultunnel Profile</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>io.nekohasekai.sfavt.profile</string>
+			<string>ru.proxplkz.ultunnel.profile</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -82,13 +82,13 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>sing-box Profile</string>
+			<string>ultunnel Profile</string>
 			<key>UTTypeIconFiles</key>
 			<array>
 				<string>AppIcon.icns</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>io.nekohasekai.sfavt.profile</string>
+			<string>ru.proxplkz.ultunnel.profile</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

@@ -64,7 +64,7 @@ public struct ProfileView: View {
                                 } label: {
                                     Text("New Profile").foregroundColor(.accentColor)
                                 }
-                                if ApplicationLibrary.inPreview || devicePickerSupports(.applicationService(name: "sing-box"), parameters: { .applicationService }) {
+                                if ApplicationLibrary.inPreview || devicePickerSupports(.applicationService(name: "ultunnel"), parameters: { .applicationService }) {
                                     FormNavigationLink {
                                         ImportProfileView()
                                     } label: {

@@ -48,11 +48,11 @@ public struct MainView: View {
                 environments.postReload()
             }
         }
-        .onChangeCompat(of: selection) { value in
-            if value == .logs {
-                environments.connectLog()
-            }
-        }
+//        .onChangeCompat(of: selection) { value in
+//            if value == .logs {
+//                environments.connectLog()
+//            }
+//        }
         .onReceive(environments.openSettings) {
             selection = .settings
         }
