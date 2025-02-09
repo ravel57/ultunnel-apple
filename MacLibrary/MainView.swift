@@ -70,9 +70,9 @@ public struct MainView: View {
             if error != nil {
                 return
             }
-            if selection != .profiles {
-                selection = .profiles
-            }
+//            if selection != .profiles {
+//                selection = .profiles
+//            }
         } else if url.pathExtension == "bpf" {
             Task {
                 await importURLProfile(url)
@@ -91,9 +91,9 @@ public struct MainView: View {
             alert = Alert(error)
             return
         }
-        if selection != .profiles {
-            selection = .profiles
-        }
+//        if selection != .profiles {
+//            selection = .profiles
+//        }
     }
 
     private nonisolated func readURL(_ url: URL) async throws -> Data {

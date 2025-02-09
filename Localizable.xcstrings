@@ -28,6 +28,9 @@
     "%lld" : {
       "shouldTranslate" : false
     },
+    "%lld Profiles" : {
+
+    },
     "↑ %@" : {
       "shouldTranslate" : false
     },
@@ -160,6 +163,7 @@
       }
     },
     "Authorize" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -267,6 +271,9 @@
         }
       }
     },
+    "Connecting..." : {
+
+    },
     "Connection" : {
       "localizations" : {
         "ru" : {
@@ -368,7 +375,13 @@
     "Domain" : {
 
     },
+    "Done" : {
+
+    },
     "Downlink" : {
+
+    },
+    "Edit" : {
 
     },
     "Edit Content" : {
@@ -461,6 +474,12 @@
     "Goroutines" : {
 
     },
+    "Groups" : {
+
+    },
+    "Handled unknown URL %@" : {
+
+    },
     "Hide VPN Icon" : {
 
     },
@@ -515,10 +534,22 @@
     "Install Network Extension" : {
 
     },
+    "Install System Extension" : {
+
+    },
     "IP Version" : {
 
     },
+    "Keep Menu Bar in Background" : {
+
+    },
     "Last Updated" : {
+
+    },
+    "Last Updated: %@" : {
+
+    },
+    "Launch the application when the system is logged in. If enabled at the same time as `Show in Menu Bar` and `Keep Menu Bar in Background`, the application interface will not be opened automatically." : {
 
     },
     "Loading..." : {
@@ -548,7 +579,13 @@
     "Name" : {
 
     },
+    "Need Reboot" : {
+
+    },
     "Network" : {
+
+    },
+    "NetworkExtension not installed" : {
 
     },
     "New Profile" : {
@@ -568,6 +605,9 @@
 
     },
     "On Demand Rules" : {
+
+    },
+    "Open" : {
 
     },
     "Other methods" : {
@@ -607,6 +647,15 @@
     "Protocol" : {
 
     },
+    "Quit" : {
+
+    },
+    "Quit ultunnel" : {
+
+    },
+    "Reboot required." : {
+
+    },
     "Remote" : {
 
     },
@@ -617,6 +666,9 @@
 
     },
     "Save" : {
+
+    },
+    "Select Device" : {
 
     },
     "Service Log" : {
@@ -644,6 +696,9 @@
     "Share URL as QR Code" : {
 
     },
+    "Show in Menu Bar" : {
+
+    },
     "Sort By" : {
 
     },
@@ -653,10 +708,34 @@
     "Sponsors" : {
 
     },
+    "Start" : {
+
+    },
+    "Start At Login" : {
+
+    },
     "State" : {
 
     },
     "Status" : {
+
+    },
+    "Stop" : {
+
+    },
+    "System Extension" : {
+
+    },
+    "System Extension removed." : {
+
+    },
+    "System Extension updated." : {
+
+    },
+    "This app needs to be placed under the Applications folder to work." : {
+
+    },
+    "To import configurations from your iPhone or iPad, make sure ultunnel is the **same version** on both devices and **VPN is disabled**." : {
 
     },
     "Traffic" : {
@@ -671,8 +750,31 @@
     "Type" : {
 
     },
+    "ultunnel" : {
+
+    },
+    "Uninstall" : {
+
+    },
     "Update" : {
 
+    },
+    "Update profiles" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update profiles"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновить профили"
+          }
+        }
+      }
     },
     "Uplink" : {
 
@@ -690,6 +792,9 @@
 
     },
     "Working Directory" : {
+
+    },
+    "Wrong application location" : {
 
     },
     "Ошибка" : {

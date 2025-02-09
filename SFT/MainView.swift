@@ -27,11 +27,11 @@ struct MainView: View {
                 environments.postReload()
             }
         }
-        .onChangeCompat(of: selection) { newValue in
-            if newValue == .logs {
-                environments.connectLog()
-            }
-        }
+//        .onChangeCompat(of: selection) { newValue in
+//            if newValue == .logs {
+//                environments.connectLog()
+//            }
+//        }
         .environment(\.selection, $selection)
     }
 }

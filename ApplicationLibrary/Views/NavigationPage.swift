@@ -20,7 +20,7 @@ public enum NavigationPage: Int, CaseIterable, Identifiable {
 public extension NavigationPage {
     #if os(macOS)
         static var macosDefaultPages: [NavigationPage] {
-            [/*.logs,*/ .profiles, .settings]
+            [/*.logs,*/ /*.profiles,*/ .settings]
         }
     #endif
 

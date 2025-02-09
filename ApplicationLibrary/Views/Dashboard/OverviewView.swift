@@ -43,6 +43,26 @@ public struct OverviewView: View {
                 ExtensionStatusView()
                 ClashModeView()
             }
+            #if os(macOS) || os(tvOS)
+                Button("Update profiles") {
+                    Task {
+                        await ProfileManager.reload(accessKey: accessKey)
+                        do {
+                            let profiles: [Profile] = try await ProfileManager.list()
+                            let profilePreviews: [ProfilePreview] = profiles.map { ProfilePreview($0) }
+                            await MainActor.run {
+                                profileList = profilePreviews
+                                forceUpdate.toggle()
+                            }
+                        } catch {
+                            await MainActor.run {
+                                alert = Alert(title: Text("Ошибка"), message: Text(error.localizedDescription))
+                            }
+                        }
+                    }
+                }
+                .padding()
+            #endif
             if profileList.isEmpty {
                 ScrollView {
                     VStack {

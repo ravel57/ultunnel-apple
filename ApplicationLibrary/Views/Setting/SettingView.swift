@@ -99,11 +99,12 @@ public struct SettingView: View {
     public init() {}
     public var body: some View {
         FormView {
+            #if !os(tvOS)
             Section(header: Text("Access Key")) {
                 TextField("Enter your access key", text: $accessKey)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
-            
+            #endif
             #if os(macOS)
                 Tabs.app.navigationLink
             #endif
