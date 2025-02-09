@@ -47,7 +47,7 @@ public struct OverviewView: View {
                 ScrollView {
                     VStack {
                         Spacer()
-                        Text("Empty profiles")
+                        Text("Empty profiles, swipe to update")
                             .font(.title)
                             .foregroundColor(.gray)
                             .multilineTextAlignment(.center)

@@ -74,7 +74,7 @@ public struct ProfileView: View {
                             }
                         #endif
                         if profileList.isEmpty {
-                            Text("Empty profiles")
+                            Text("Empty profiles, swipe to update")
                         } else {
                             List {
                                 ForEach(profileList, id: \.id) { profile in

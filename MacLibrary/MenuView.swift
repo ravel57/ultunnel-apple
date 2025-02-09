@@ -138,7 +138,7 @@ public struct MenuView: View {
                     }
                 } else {
                     if profileList.isEmpty {
-                        Text("Empty profiles")
+                        Text("Empty profiles, swipe to update")
                     } else {
                         MenuSection(String(localized: "Profile"))
                         Picker("", selection: selectedProfileIDLocal) {

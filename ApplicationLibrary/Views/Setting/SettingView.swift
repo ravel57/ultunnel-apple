@@ -110,69 +110,69 @@ public struct SettingView: View {
             ForEach([Tabs.core, Tabs.packetTunnel, Tabs.onDemandRules, Tabs.profileOverride]) { it in
                 it.navigationLink
             }
-            #if !os(tvOS)
-                Section("About") {
-                    Link(destination: URL(string: String(localized: "https://sing-box.sagernet.org/"))!) {
-                        Label("Documentation", systemImage: "doc.on.doc.fill")
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundColor(.accentColor)
-                    .contextMenu {
-                        Link(destination: URL(string: String(localized: "https://sing-box.sagernet.org/changelog/"))!) {
-                            Text("Changelog")
-                        }
-                        Link(destination: URL(string: String(localized: "https://sing-box.sagernet.org/configuration/"))!) {
-                            Text("Configuration")
-                        }
-                    }
-                    Link(destination: URL(string: String("https://github.com/SagerNet/sing-box"))!) {
-                        Label("Source Code", systemImage: "pills.fill")
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundColor(.accentColor)
-                    .contextMenu {
-                        Link(destination: URL(string: String("https://github.com/SagerNet/sing-box/releases"))!) {
-                            Text("Releases")
-                        }
-                    }
-                    RequestReviewButton {
-                        Label("Rate on the App Store", systemImage: "text.bubble.fill")
-                    }
-                    #if os(macOS)
-                        if Variant.useSystemExtension {
-                            Tabs.sponsors.navigationLink
-                        }
-                    #endif
-                }
-            #endif
-            Section("Debug") {
-                FormNavigationLink {
-                    ServiceLogView()
-                } label: {
-                    Label("Service Log", systemImage: "doc.on.clipboard")
-                }
-                FormTextItem("Taiwan Flag Available", "touchid") {
-                    if isLoading {
-                        Text("Loading...")
-                            .onAppear {
-                                Task.detached {
-                                    let available: Bool
-                                    if ApplicationLibrary.inPreview {
-                                        available = true
-                                    } else {
-                                        available = !DeviceCensorship.isChinaDevice()
-                                    }
-                                    await MainActor.run {
-                                        taiwanFlagAvailable = available
-                                        isLoading = false
-                                    }
-                                }
-                            }
-                    } else {
-                        Text(taiwanFlagAvailable.toString())
-                    }
-                }
-            }
+//            #if !os(tvOS)
+//                Section("About") {
+//                    Link(destination: URL(string: String(localized: "https://sing-box.sagernet.org/"))!) {
+//                        Label("Documentation", systemImage: "doc.on.doc.fill")
+//                    }
+//                    .buttonStyle(.plain)
+//                    .foregroundColor(.accentColor)
+//                    .contextMenu {
+//                        Link(destination: URL(string: String(localized: "https://sing-box.sagernet.org/changelog/"))!) {
+//                            Text("Changelog")
+//                        }
+//                        Link(destination: URL(string: String(localized: "https://sing-box.sagernet.org/configuration/"))!) {
+//                            Text("Configuration")
+//                        }
+//                    }
+//                    Link(destination: URL(string: String("https://github.com/SagerNet/sing-box"))!) {
+//                        Label("Source Code", systemImage: "pills.fill")
+//                    }
+//                    .buttonStyle(.plain)
+//                    .foregroundColor(.accentColor)
+//                    .contextMenu {
+//                        Link(destination: URL(string: String("https://github.com/SagerNet/sing-box/releases"))!) {
+//                            Text("Releases")
+//                        }
+//                    }
+//                    RequestReviewButton {
+//                        Label("Rate on the App Store", systemImage: "text.bubble.fill")
+//                    }
+//                    #if os(macOS)
+//                        if Variant.useSystemExtension {
+//                            Tabs.sponsors.navigationLink
+//                        }
+//                    #endif
+//                }
+//            #endif
+//            Section("Debug") {
+//                FormNavigationLink {
+//                    ServiceLogView()
+//                } label: {
+//                    Label("Service Log", systemImage: "doc.on.clipboard")
+//                }
+//                FormTextItem("Taiwan Flag Available", "touchid") {
+//                    if isLoading {
+//                        Text("Loading...")
+//                            .onAppear {
+//                                Task.detached {
+//                                    let available: Bool
+//                                    if ApplicationLibrary.inPreview {
+//                                        available = true
+//                                    } else {
+//                                        available = !DeviceCensorship.isChinaDevice()
+//                                    }
+//                                    await MainActor.run {
+//                                        taiwanFlagAvailable = available
+//                                        isLoading = false
+//                                    }
+//                                }
+//                            }
+//                    } else {
+//                        Text(taiwanFlagAvailable.toString())
+//                    }
+//                }
+//            }
         }
     }
 }
